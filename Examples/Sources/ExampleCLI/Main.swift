@@ -17,14 +17,17 @@ struct ExampleCLI {
     static func main() {
         // Get arguments that were passed into this executable and will be forwarded to lefthook as args.
         let lefthookArgs = Array(ProcessInfo.processInfo.arguments.dropFirst())
+        let currentDirectoryPath = FileManager.default.currentDirectoryPath
+
+        print("currentDirectoryPath: \(currentDirectoryPath)")
 
         // Get the current directory name to use as the repository name for finding the binary.
-        guard let currentDirectory = FileManager.default.currentDirectoryPath.components(separatedBy: "/").last,
+        guard let currentDirectory = currentDirectoryPath.components(separatedBy: "/").last,
               let binaryPath = ArtifactParser.getPathToBinary(
                 binaryName: "lefthook",
                 repositoryName: currentDirectory
               ) else {
-            print("Error: Unable to find lefthook binary. Unable to run lefthook.")
+            print("Error: Unable to find lefthook binary. Make sure use `swift run` to execute this application.")
             exit(1)
         }
 

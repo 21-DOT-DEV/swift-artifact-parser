@@ -17,7 +17,7 @@ let package = Package(
         .executableTarget(
             name: "ExampleCLI",
             dependencies: [
-                .product(name: "ArtifactParser", package: "swift-plugin-artifact-expander")
+                .product(name: "ArtifactParser", package: "swift-artifact-parser")
             ]
         ),
         .binaryTarget(
